@@ -1,0 +1,32 @@
+server {
+    if ($host = ms-db.platform.vidh.ai) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+	listen 80;
+	listen [::]:80;
+	server_name ms-db.platform.vidh.ai;
+	#return 301 https://$host$request_uri;
+	root /var/www/vallies.me;
+	index index.html index.php;
+	
+	location / {
+                proxy_pass http://vvet.in;
+  
+        }	
+	
+
+}
+
+server{
+	listen 443;
+	listen [::]:443;
+	server_name ms-db.platform.vidh.ai;
+        root /var/www/vallies.me;
+        index index.php index.html;
+    ssl_certificate /etc/letsencrypt/live/ms-db.platform.vidh.ai/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/ms-db.platform.vidh.ai/privkey.pem; # managed by Certbot
+
+
+}
